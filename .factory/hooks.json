@@ -1,0 +1,54 @@
+{
+  "PreToolUse": [
+    {
+      "matcher": "Execute",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "python3 \"$FACTORY_PROJECT_DIR\"/.factory/hooks/guard_prod.py",
+          "timeout": 10,
+          "onFailure": "block"
+        }
+      ]
+    },
+    {
+      "matcher": "Create|Edit|ApplyPatch|Execute",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "python3 \"$FACTORY_PROJECT_DIR\"/.factory/hooks/guard_guardrails.py",
+          "timeout": 10,
+          "onFailure": "block"
+        },
+        {
+          "type": "command",
+          "command": "python3 \"$FACTORY_PROJECT_DIR\"/.factory/hooks/guard_tests.py",
+          "timeout": 10,
+          "onFailure": "block"
+        }
+      ]
+    },
+    {
+      "matcher": "Create|Edit|ApplyPatch",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "python3 \"$FACTORY_PROJECT_DIR\"/.factory/hooks/guard_secrets.py",
+          "timeout": 10,
+          "onFailure": "block"
+        }
+      ]
+    }
+  ],
+  "Stop": [
+    {
+      "hooks": [
+        {
+          "type": "command",
+          "command": "python3 \"$FACTORY_PROJECT_DIR\"/.factory/hooks/check_cdk_nag.py",
+          "timeout": 600
+        }
+      ]
+    }
+  ]
+}
