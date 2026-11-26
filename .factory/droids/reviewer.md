@@ -27,6 +27,7 @@ You'll be given a PR number. Gather:
    - every DynamoDB key built through `packages/core/src/keys.ts`
    - no weakened tests (compare test files to `main`)
    - no secrets, no production references
+   - no CI check removed or weakened in `.github/workflows/`
 4. **Data correctness.** Limits enforced with conditional writes (not read-then-write); things that must happen together in one transaction; strongly consistent reads for user-facing data; keys match `docs/data-model.md`.
 5. **Docs.** If the change alters the data model, API or architecture, the matching doc is updated in this PR.
 6. **Frontend** (when touched). Only Tailwind theme classes (no hex or pixel values, no new CSS); shared components and Radix primitives used; TanStack Query for server data; copy follows the design system's voice rules.

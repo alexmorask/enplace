@@ -2,7 +2,7 @@
 
 Enplace is a meal planner for one household, built around batch cooking: plan the week, share it, get one grocery list. It's an installable web app (PWA) on a serverless AWS backend.
 
-This file is edited by hand only. Droids can't change it, `.factory/`, or `.github/workflows/` (a hook blocks it). If a rule here gets in the way, say so in the PR instead of working around it.
+This file is edited by hand only. Droids can't change it or `.factory/` (a hook blocks it). If a rule here gets in the way, say so in the PR instead of working around it.
 
 ## Rules that are never broken
 
@@ -11,6 +11,7 @@ This file is edited by hand only. Droids can't change it, `.factory/`, or `.gith
 3. **Never commit secrets.** No `.env` files, keys or tokens in the repo. Secrets live in AWS Secrets Manager.
 4. **The household always comes from the token.** Never accept a household ID, member ID or role from client input. Every resolver starts with the shared membership check.
 5. **Every DynamoDB key is built by `packages/core/src/keys.ts`.** Never write a `PK`/`SK` string by hand anywhere else.
+6. **Never remove or weaken a CI check** in `.github/workflows/` to get a PR through. If a check is wrong, leave it and explain why in the PR.
 
 ## Commands
 
